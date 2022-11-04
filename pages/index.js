@@ -2,9 +2,10 @@ import Head from "next/head";
 import Image from "next/image";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
+import MeduimCard from "../components/MeduimCard";
 import SmallCard from "../components/SmallCard";
 
-const Home = ({ exploreData }) => {
+const Home = ({ exploreData, cardsData }) => {
     return (
         <div className="">
             <Head>
@@ -19,7 +20,7 @@ const Home = ({ exploreData }) => {
                 <section className="pt-6">
                     <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        {exploreData.map((e, i) => {
+                        {exploreData?.map((e, i) => {
                             return (
                                 <SmallCard
                                     key={i}
@@ -33,6 +34,14 @@ const Home = ({ exploreData }) => {
                 </section>
                 <section>
                     <h2 className="text-4xl font-semibold py-8">Live anywhere</h2>
+                    <div className="flex space-x-3 overflow-scroll scrollbar-hide p-3 ml-3">
+                        {
+                            cardsData?.map((e, i) => {
+                                return (<MeduimCard key={i} img={e.img} title={e.title} />)
+                            })
+                        }
+                    </div>
+
                 </section>
             </main>
         </div>
@@ -51,11 +60,15 @@ export async function getStaticProps() {
         agent,
     }).then((res) => res.json());
 
-    const cardsData = await fetch ()
+    const cardsData = await fetch("https://jsonkeeper.com/b/6UZM", {
+        method: "GET",
+        agent,
+    }).then((res) => res.json())
 
     return {
         props: {
             exploreData: exploreData,
+            cardsData: cardsData
         },
     };
 }
