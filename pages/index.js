@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
+import LargeCard from "../components/LargeCard";
 import MeduimCard from "../components/MeduimCard";
 import SmallCard from "../components/SmallCard";
 
@@ -43,6 +44,12 @@ const Home = ({ exploreData, cardsData }) => {
                     </div>
 
                 </section>
+                <LargeCard
+                    img="https://links.papareact.com/4cj"
+                    title="The Greatest Outdoors"
+                    description="Wishlist curated by Airbnb"
+                    buttonTxt="Get Inspired"
+                />
             </main>
         </div>
     );
